@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='courses.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="page-header">
+        <div class="header-left">
+            <h1>
+                <i class="fas fa-graduation-cap"></i>
+                Available Courses
+            </h1>
+            <span class="course-count">{{ courses|length }} Courses</span>
+        </div>
+
+        {% if role == "admin" %}
+        <a href="{{ url_for('admin_panel') }}" class="add-btn">
+            <i class="fas fa-shield-alt"></i>
+            Admin Panel
+        </a>
+        {% endif %}
+
+        {% if role == "teacher" %}
+        <a href="{{ url_for('add_course') }}" class="add-btn">
+            <i class="fas fa-plus-circle"></i>
+            Create New Course
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="course-grid">
+
+        {% for course in courses %}
+
+        <div class="course-card">
+
+            <div class="course-thumbnail">
+                <img
+                    src="{{ url_for('static', filename='images/' + (course.thumbnail or 'default-course.jpg')) }}"
+                    alt="{{ course.title }}"
+                >
+
+                <div class="thumbnail-badge">
+                    <i class="fas fa-user-tie"></i>
+                    {{ course.teacher.username }}
+                </div>
+            </div>
+
+            <div class="course-content">
+
+                <h2>
+                    <i class="fas fa-book-open"></i>
+                    {{ course.title }}
+                </h2>
+
+                <p class="course-description">
+                    {{ course.description[:150] }}{% if course.description|length > 150 %}...{% endif %}
+                </p>
+
+                <div class="course-footer">
+
+                    <span class="teacher">
+                        <i class="fas fa-user-tie"></i>
+                        {{ course.teacher.username }}
+                    </span>
+
+                    <div class="action-group">
+
+                        {% if role == "teacher" and course.teacher_id == user_id %}
+
+                        <a href="{{ url_for('edit_course', course_id=course.id) }}"
+                           class="btn btn-edit">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </a>
+
+                        <form action="{{ url_for('delete_course', course_id=course.id) }}"
+                              method="POST"
+                              style="display:inline;">
+
+                            <button
+                                type="submit"
+                                class="btn btn-delete"
+                                onclick="return confirm('Delete this course?');">
+
+                                <i class="fas fa-trash-alt"></i>
+                                Delete
+
+                            </button>
+
+                        </form>
+
+                        {% endif %}
+
+                        <!-- View Button - links to course detail page -->
+{#                        <a href="{{ url_for('view_course', course_id=course.id) }}" class="btn btn-view">#}
+{#                            <i class="fas fa-eye"></i>#}
+{#                            View#}
+{#                        </a>#}
+
+                        <!-- Enroll Button -->
+                        {% if role == "student" %}
+                            {% if course.id in enrolled_courses %}
+                                <button class="btn btn-enrolled" disabled>
+                                    <i class="fas fa-check-circle"></i>
+                                    Enrolled
+                                </button>
+                            {% else %}
+                                <form action="{{ url_for('enroll', course_id=course.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-enroll">
+                                        <i class="fas fa-plus-circle"></i>
+                                        Enroll
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

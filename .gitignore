@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Flask
+instance/
+.flaskenv
+
+# SQLAlchemy / SQLite
+*.db
+*.sqlite3
+
+# Alembic
+migrations/
+alembic/versions/__pycache__/
+alembic.ini
+
+# Uploaded files
+static/images/*
+static/materials/*
+
+# Keep folders even when empty
+!static/images/.gitkeep
+!static/materials/.gitkeep
+
+# IDEs
+.idea/
+.vscode/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.swp

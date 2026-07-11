@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - NoIdea Space</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='courses.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+<body>
+
+<div class="container register-container">
+
+    <div class="page-header">
+        <h1>
+            <i class="fas fa-user-plus"></i> Create your account
+        </h1>
+        <!-- <a href="{{ url_for('login') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Login
+        </a> -->
+    </div>
+
+    <form action="{{ url_for('register') }}" method="POST" class="register-form">
+
+        <div class="form-group">
+            <label for="username">
+                <i class="fas fa-user"></i> Username
+            </label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="email">
+                <i class="fas fa-envelope"></i> Email
+            </label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="password">
+                <i class="fas fa-lock"></i> Password
+            </label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password (min 8 chars)"
+                minlength="8"
+                required
+            >
+        </div>
+
+        <!-- Role is automatically set to 'student' in the backend -->
+        <!-- No role selection needed - admins will promote teachers -->
+
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-user-plus"></i> Create Account
+        </button>
+
+        <!--
+        <p class="login-link">
+            Already have an account? <a href="{{ url_for('login') }}">Sign in</a>
+        </p>
+        -->
+
+    </form>
+
+</div>
+
+</body>
+</html>
