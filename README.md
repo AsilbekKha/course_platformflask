@@ -107,58 +107,50 @@ Windows:
 ```bash
 .venv\Scripts\activate
 ```
+Before running the application, make sure you have:
 
-Install dependencies:
+Python 3.12 or newer
+PostgreSQL 15 or newer
+Git
+Database Setup
 
-```bash
-pip install -r requirements.txt
-```
+Create a PostgreSQL database:
 
----
+CREATE DATABASE course_management;
 
-## Configuration
+Alternatively, from the terminal:
 
-Create a `.env` file containing your secret key and database connection.
+createdb course_management
 
-Example:
+Configure your database connection in a .env file:
 
-```
+DATABASE_URL=postgresql://username:password@localhost/course_management
 SECRET_KEY=your_secret_key
-DATABASE_URL=postgresql://username:password@localhost/database_name
-```
-
----
-
-## Running the Application
-
-Run the Flask development server:
-
-```bash
+Install Dependencies
+pip install -r requirements.txt
+Run the Application
 flask run
-```
 
-or
+The application will automatically create the required database tables on first launch.
 
-```bash
-python app.py
-```
+User Roles
 
----
-Demo Roles
+Newly registered users are assigned the Student role by default.
 
-All newly registered accounts are assigned the Student role.
+To test teacher or administrator functionality, promote an account manually using PostgreSQL.
 
-To test teacher or administrator functionality, promote an account manually:
+Make a user a teacher:
 
 UPDATE users
 SET role = 'teacher'
 WHERE username = 'your_username';
 
-Administrator:
+Make a user an administrator:
 
 UPDATE users
 SET role = 'admin'
 WHERE username = 'your_username';
+
 
 ## Current Functionality
 
