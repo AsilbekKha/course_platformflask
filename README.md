@@ -144,6 +144,21 @@ python app.py
 ```
 
 ---
+Demo Roles
+
+All newly registered accounts are assigned the Student role.
+
+To test teacher or administrator functionality, promote an account manually:
+
+UPDATE users
+SET role = 'teacher'
+WHERE username = 'your_username';
+
+Administrator:
+
+UPDATE users
+SET role = 'admin'
+WHERE username = 'your_username';
 
 ## Current Functionality
 
