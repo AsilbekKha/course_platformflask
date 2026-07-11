@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import joinedload
 import os
 import uuid
-
+Base.metadata.create_all(engine)
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
