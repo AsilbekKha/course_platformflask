@@ -75,8 +75,6 @@ FlaskProject/
 │   ├── register.css
 │   ├── add_course.css
 │   └── edit_course.css
-│
-└── migrations/
 ```
 
 ---
